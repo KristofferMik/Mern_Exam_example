@@ -4,7 +4,7 @@ const databaseName = "musiclious";
 const MONGO_URL = process.env.MONGO_URL || `mongodb://localhost/${databaseName}`; 
 
 //create connection
-mongoose.connect(MONGO_URL, { useNewUrlParser: true , useUnifiedTopology: true})
+mongoose.connect(MONGO_URL, { useNewUrlParser: true , useUnifiedTopology: true, useUnifiedTopology: true, useCreateIndex: true})
     .catch(e => {
         console.error('Connection error', e.message)
     });

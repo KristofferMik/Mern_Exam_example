@@ -1,0 +1,1 @@
+// if the user is not logged in. There should be displayed a error asking them to log in

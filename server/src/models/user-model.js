@@ -8,4 +8,4 @@ const User = new Schema(
   }
 );
 
-const SomeModel = mongoose.model('Users', User );
+module.exports = mongoose.model('Users', User );
