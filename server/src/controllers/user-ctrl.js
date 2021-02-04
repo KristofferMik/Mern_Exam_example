@@ -1,28 +1,37 @@
 const Users = require('../models/user-model.js');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 authUser = async (req, res) => {
+  const secret = process.env.SECRET || 'AReallyGoodSecret';
 
   if (!req.body.password || !req.body.username) {
     res.status(401).json({succes: false, body: "Missing Password or username"});
     return;
   }
-
-  //kode 401 is for Unauthorized. aka if the user does not permission. https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
-  let response;
+  
+  let queryres;
   try {
-    response = await Users.find(req.body.username)
+    queryres = await Users.findOne({name: req.body.username});
   } catch (error) {
     console.error("authUser:", error.message);
     res.status(400).json({succes: false, body: "An unexpected error"});
     return;
   }
 
-  if (!response) {
-    res.status(401).json({succes: false, body: "Access Denied"});
+  if (!queryres) {
+    res.status(401).json({succes: false, body: "No Such User"});
     return;
   }
 
-  res.status(200).json({succes: true, body: "Token goes here"});
+  if (!bcrypt.compareSync(req.body.password, queryres.password)) {
+    res.status(401).json({succes: false, body: "Incorrect Password"});
+    return;
+  }
+
+  const token = jwt.sign({user: queryres.username}, secret, { algorithm: 'HS512', expiresIn: '4h' });
+  res.status(200).json({succes: true, body: token});
+
 }
 
 module.exports = {

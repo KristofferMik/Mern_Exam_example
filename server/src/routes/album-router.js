@@ -7,6 +7,6 @@ const router = express.Router();
 // router.post('/album', AlbumCtrl.createMovie);
 router.get('/album/:id', AlbumCtrl.getAlbum);
 router.get('/albums', AlbumCtrl.getAlbums);
-router.put('/albumReview/:id', AlbumCtrl.putAlbumReview);
+router.put('/albumReview', AlbumCtrl.putAlbumReview);
 
 module.exports = router;

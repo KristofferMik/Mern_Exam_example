@@ -3,14 +3,11 @@ const databaseName = "musiclious";
 
 const MONGO_URL = process.env.MONGO_URL || `mongodb://localhost/${databaseName}`; 
 
-//create connection
-mongoose.connect(MONGO_URL, { useNewUrlParser: true , useUnifiedTopology: true, useUnifiedTopology: true, useCreateIndex: true})
+mongoose.connect(MONGO_URL, { useNewUrlParser: true , useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true})
     .catch(e => {
         console.error('Connection error', e.message)
     });
 
-//get that connection
 const db = mongoose.connection;
 
-//export that connection
 module.exports = db;
