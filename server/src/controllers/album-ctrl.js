@@ -31,8 +31,8 @@ getAlbum = async (req, res) => {
     res.status(404).json({succes: false, body: "No album found"});
     return;
   }
-
-  res.status(200).json({succes: true, body: queryres});
+  const reviewStats = prepareAlbum(queryres);
+  res.status(200).json({succes: true, body: {'album': queryres, 'reviewStats': reviewStats}});
 }
 
 putAlbumReview = async (req, res) => {
@@ -54,14 +54,32 @@ putAlbumReview = async (req, res) => {
     res.status(404).json({succes: false, body: "No album found"});
     return;
   }
-
-  res.status(201).json({succes: true, body: newReview});
+  const reviewStats = prepareAlbum(newReview);
+  res.status(201).json({succes: true, body: {'album': newReview, 'reviewStats': reviewStats}});
 }
 
 module.exports = {
   getAlbums,
   getAlbum,
   putAlbumReview
+}
+
+/*Gets the number of reviews on the Album, then saves as reviewCount
+  Gets the total rating of all reviews and divide that with reviewCount, then saves as reviewAvg
+  Removes all reviews with empty body. No need to display them.
+  adds reviewCount and reviewAvg to a reviewStats and returns that
+  Would be better if reviews were a subdocument instead. If time (and brain power) permits, see to that. 
+*/
+function prepareAlbum(album){
+  const reviewCount = album.reviews.length;
+  let reviewAvg = 0; 
+
+  album.reviews.forEach(o => reviewAvg += o.rating);
+  reviewAvg /= reviewCount;
+
+  album.reviews = album.reviews.filter(o => o.body.length >= 1);
+  const reviewStats = {'reviewCount': reviewCount, 'reviewAvg': reviewAvg};
+  return reviewStats;
 }
 
 const albumsBoot = require('./createTestData.js');
