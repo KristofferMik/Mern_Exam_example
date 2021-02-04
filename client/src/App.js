@@ -1,23 +1,24 @@
+//liberaries
 import React, {useEffect, useState} from 'react';
+import { Router } from "@reach/router";
+//Pages
+import {AlbumList, Album, Login} from "./pages";
+//Components
+// import { ComponentExample } from './components'
+
 const API_URL = process.env.REACT_APP_API;
 
 function App() {
-  const [data, setData] = useState("No data :(");
-  
-  useEffect(() => {
-    async function getData() {
-      const url = `${API_URL}/hello`;
-      const response = await fetch(url);
-      const data = await response.json();
-      setData(data.msg);
-    }
-    getData();
-  }, []); 
 
+//loginManager={loginManager}
   return (
     <>
       <h1>Musiclious</h1>
-      <p>Data from server: {data}</p>
+      <Router>
+        <AlbumList path="/" url={API_URL}/>
+        <Album path="/:id" url={API_URL} />
+        <Login path="/login" url={API_URL}/>
+      </Router>
     </>
   );
 }
