@@ -1,15 +1,28 @@
 import React, {useState} from 'react';
+import {LinkTo, InputsWIthSubmit} from '../components';
 
 function Login(props) {
-  const [msg, setMsg] = useState("Hello");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  function LoginUser(e) {
+    //async login function here
+
+    setUsername("");
+    setPassword("");
+  }
 
   return (
     <>
-      <h1>Welcome to APP</h1>
-      
-      <p>{msg}</p> 
+      <LinkTo to="/" text="Home"/>
+      <InputsWIthSubmit list={[
+        {name: "Username", type: "text", value: username, onchangefunc: (e) => setUsername(e.target.value)},
+        {name: "Password", type: "password", value: password, onchangefunc: (e) => setPassword(e.target.value)}
+      ]}
+      buttonText="Login" buttonFunction={LoginUser}
+      />
 
     </>
   )
 }
-export default Login;
+export default Login;//list objekter: name, type, value, onchangefunc

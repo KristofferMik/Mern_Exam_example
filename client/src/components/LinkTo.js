@@ -1,12 +1,12 @@
 import {Link} from '@reach/router';
 import React from "react";
 
-function LinkBack(props) {
+function LinkTo(props) {
   return (
     <>
-      <Link to={`/`}>Home</Link>
+      <Link to={props.to}>{props.text}</Link>
     </>
   )
 }
 
-export default LinkBack;
+export default LinkTo;

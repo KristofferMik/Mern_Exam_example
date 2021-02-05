@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ListLinks} from "../components"
+import {ListLinks, LinkTo} from "../components"
 
 function AlbumList(props) {
   const [albums, setAlbums] = useState([]);
@@ -22,6 +22,7 @@ function AlbumList(props) {
 
   return (
     <>
+      <LinkTo to="/login" text="Login"/>
       <p>The Albums:</p> 
       <ListLinks list={albums}/>
     </>

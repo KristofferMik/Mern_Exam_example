@@ -31,7 +31,7 @@ getAlbum = async (req, res) => {
     res.status(404).json({succes: false, body: "No album found"});
     return;
   }
-  const reviewStats = prepareAlbum(queryres);
+  const reviewStats =  albumStats(queryres);
   res.status(200).json({succes: true, body: {'album': queryres, 'reviewStats': reviewStats}});
 }
 
@@ -44,7 +44,6 @@ putAlbumReview = async (req, res) => {
   }
 
   try {
- 
     newReview = await Album.findByIdAndUpdate(req.body.id, { $push: {"reviews": {rating: req.body.rating, body: req.body.body, creator: req.body.creator, DateOfCreation: Date.now()}}}, {new: true});
   } catch (error) {
     console.error("putAlbumReview:", error.message);
@@ -55,7 +54,7 @@ putAlbumReview = async (req, res) => {
     res.status(404).json({succes: false, body: "No album found"});
     return;
   }
-  const reviewStats = prepareAlbum(newReview);
+  const reviewStats = albumStats(newReview);
   res.status(201).json({succes: true, body: {'album': newReview, 'reviewStats': reviewStats}});
 }
 
@@ -71,7 +70,7 @@ module.exports = {
   adds reviewCount and reviewAvg to a reviewStats and returns that
   Would be better if reviews were a subdocument instead. If time (and brain power) permits, see to that. 
 */
-function prepareAlbum(album){
+function albumStats(album){
   const reviewCount = album.reviews.length;
   let reviewAvg = 0; 
 

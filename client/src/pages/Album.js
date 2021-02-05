@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {LinkBack, ListNumberCreaterDataText} from '../components';
+import {LinkTo, ListNumberCreaterDataText} from '../components';
 
 function Album(props) {
   const [album, setAlbum] = useState({});
@@ -19,20 +19,20 @@ function Album(props) {
       }
     }
     getAlbum();
-  }, [props.url]); 
+  }, [props.url, props.id]); 
 
   if (!album || (Object.keys(album).length === 0 && album.constructor === Object)) {
     return (
       <>
         <p>No Data! try to refresh or go back to frontpage</p>
-        <LinkBack/>
+        <LinkTo to="/" text="Home"/>
       </>
     )
   }
 
   return (
     <>
-      <LinkBack/>
+      <LinkTo to="/" text="Home"/>
       <p>Title: {album.album.title}</p>
       <p>Artist: {album.album.artist}</p>
       <p>Genre: {album.album.genre}</p>
