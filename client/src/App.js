@@ -1,5 +1,5 @@
 //liberaries
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { Router } from "@reach/router";
 //Pages
 import {AlbumList, Album, Login} from "./pages";

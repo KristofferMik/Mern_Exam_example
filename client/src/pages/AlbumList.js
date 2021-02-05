@@ -12,10 +12,11 @@ function AlbumList(props) {
   return (
     <>
       <LinkTo to="/login" text="Login"/>
+      <button onClick={() => {props.auther.logout()}}>logout</button>
       <p>The Albums:</p> 
       <ListLinks list={albums}/>
-      <button onClick={() => {props.auther.status()}}>status</button>
-      <button onClick={() => {props.auther.logout()}}>logout</button>
+
+      
     </>
   )
 }

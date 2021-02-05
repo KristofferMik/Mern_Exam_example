@@ -6,7 +6,6 @@ function Login(props) {
   const [password, setPassword] = useState("");
 
   function LoginUser(e) {
-    //async login function here
     props.auther.login(username, password);
     setUsername("");
     setPassword("");

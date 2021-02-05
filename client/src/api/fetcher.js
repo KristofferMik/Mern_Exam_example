@@ -14,6 +14,8 @@ async function getData(path, setData) {
 }
 
 async function putData(path, setData, sendData, auth) {
+  console.log(path);
+  console.log(sendData);
   const url = `${path}`;
   const response = await fetch(url, {
     method: "PUT",

@@ -56,7 +56,5 @@ app.get('*', (req, res) =>
   res.sendFile(path.resolve('..', 'client', 'build', 'index.html'))
 );
 
-//kode 401 is for Unauthorized. aka if the user does not permission. https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
-
 // Starts listening for requests.
 app.listen(apiPort, () => console.log(`${appName} Server running on port ${apiPort}`));

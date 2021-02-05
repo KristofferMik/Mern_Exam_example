@@ -35,11 +35,10 @@ class authenticator {
     }); 
 
     const userRes = await response.json();
-    console.log(userRes);
-    console.log(userRes.body);
 
     if (userRes.succes){
       this.setLoginToken(userRes.body);
+      alert("Login success");
     }
     else {
       alert(userRes.body);
@@ -51,8 +50,10 @@ class authenticator {
   }
 
   status() {
+ 
     let token = this.getLoginToken();
-    if (!token) {
+
+    if (token === null) {
         return false;
     }
 
@@ -70,9 +71,9 @@ class authenticator {
   getUsername() {
     let token = this.getLoginToken();
 
-    if (!token) {
-        return false;
-    }
+    if (token === null) {
+      return false;
+  }
 
     let decodedToken = jwtdecode(token);
 
