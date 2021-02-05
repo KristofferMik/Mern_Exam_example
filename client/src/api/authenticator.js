@@ -36,7 +36,9 @@ class authenticator {
     }); 
 
     const userRes = await response.json();
-
+    console.log(userRes);
+    console.log(userRes.body);
+    
     if (userRes.succes){
       this.setLoginToken(userRes.body);
     }

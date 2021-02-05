@@ -7,7 +7,7 @@ function Login(props) {
 
   function LoginUser(e) {
     //async login function here
-
+    props.auther.login(username, password);
     setUsername("");
     setPassword("");
   }

@@ -6,7 +6,7 @@ function InputWithSubmit(props) {
     {props.list.map((item) => 
         <input key={item.name} placeholder={item.name} type={item.type} value={item.value} onChange={item.onchangefunc}/>
       )}
-      <button onChange={props.buttonFunction}>{props.buttonText}</button>
+      <button onClick={props.buttonFunction}>{props.buttonText}</button>
   </div>
   )
 }
