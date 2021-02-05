@@ -8,7 +8,7 @@ import auth from "./api/authenticator";
 
 const API_URL = process.env.REACT_APP_API;
 
-const auther = new auth(`${API_URL}/user`);
+const auther = new auth(`${API_URL}`);
 
 function App() {
 

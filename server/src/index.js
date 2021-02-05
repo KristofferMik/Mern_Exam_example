@@ -17,6 +17,7 @@ const secret = process.env.SECRET || 'AReallyGoodSecret';
 const openPaths = [
 
   { url: "/api/user", methods: ["POST"] },
+  { url: "/api/userRegister", methods: ["POST"] },
   { url: /\/api\/album\.*/gim, methods: ["GET"] },
   { url: "/api/albums", methods: ["GET"] },
   

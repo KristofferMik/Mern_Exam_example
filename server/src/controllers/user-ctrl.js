@@ -33,8 +33,37 @@ authUser = async (req, res) => {
 
 }
 
+addUser = async (req, res) => {
+
+  if (!req.body.username || !req.body.password) {
+    res.status(401).json({succes: false, body: "Missing Password or username"});
+    return;
+  }
+
+  try {
+    if (await Users.findOne({name: req.body.username}) != null) {
+      res.status(400).json({succes: false, body: "username taken"});
+      return;
+    }
+  } catch (error) {
+    console.error("addUser:", error.message);
+    res.status(400).json({succes: false, body: "An unexpected error"});
+    return;
+  }
+
+
+  try {
+    await Users.create({name: req.body.username, password: bcrypt.hashSync(req.body.password, 10)});
+    res.status(200).json({succes: true, body: "User Created! Please log in"});
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
 module.exports = {
-  authUser
+  authUser,
+  addUser
 }
 
 const userBoot = require('./createTestData.js');

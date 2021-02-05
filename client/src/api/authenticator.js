@@ -19,7 +19,7 @@ class authenticator {
   }
 
   async login(username, password) {
-    const url = `${this.auth_api_url}`;
+    const url = `${this.auth_api_url}/user`;
 
     let user = {
       username: username,
@@ -42,6 +42,25 @@ class authenticator {
     }
     else {
       alert(userRes.body);
+    }
+  }
+
+  async registerUser(user) {
+    const url = `${this.auth_api_url}/userRegister`;
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        'content-Type': 'application/json',
+      },
+      body: JSON.stringify(user)
+    });
+    const jsonRes = await response.json();
+    
+    if (jsonRes.succes) {
+      alert(jsonRes.body);
+    }
+    else {
+      alert(jsonRes.body);
     }
   }
 
