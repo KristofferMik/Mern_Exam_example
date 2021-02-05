@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {ListLinks, LinkTo} from "../components";
-import getData from "../routing/fetcher.js";
+import {getData} from "../api/fetcher.js";
 
 function AlbumList(props) {
   const [albums, setAlbums] = useState([]);

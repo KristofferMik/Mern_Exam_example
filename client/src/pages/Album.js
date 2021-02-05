@@ -1,13 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import {LinkTo, ListNumberCreaterDataText} from '../components';
-import getData from "../routing/fetcher.js";
+import {getData} from "../api/fetcher.js";
 
 function Album(props) {
   const [album, setAlbum] = useState({});
 
   useEffect(() => {
-    getData(`${props.url}/album/${props.id}`, setAlbum);
+    getData(`${props.url}/album/${props.id}`, sortReviews);
   }, [props.url, props.id]); 
+
+  function sortReviews(albumToSort) {
+    albumToSort.album.reviews.sort((a,b) => {
+      return new Date(b.DateOfCreation) - new Date(a.DateOfCreation);
+    });
+
+    setAlbum(albumToSort);
+  }
 
   if (!album || (Object.keys(album).length === 0 && album.constructor === Object)) {
     return (
@@ -33,11 +41,6 @@ function Album(props) {
   )
 }
 export default Album;
-
-//When it gets the album. have a function that gets how many 
-//reviews there is and makes sure that is displayed, 
-//also gets and adds together the ratings then divide by number of reviews
-
 
 //Added AddReview to here:
 // if the user is not logged in. There should be displayed a error asking them to log in

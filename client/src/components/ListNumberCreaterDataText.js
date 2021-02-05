@@ -1,7 +1,7 @@
 import React from "react";
 
 function ListNumberCreaterDataText(props) {
-
+  
   return (
     <ul>
       {props.list.map((item) => 
