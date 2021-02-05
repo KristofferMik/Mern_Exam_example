@@ -12,7 +12,7 @@ function InputWithSubmit(props) {
 }
 export default InputWithSubmit;
 
-//input with submit – får; array med objekter der beskriver: navn på field, default value, useState metode. 
+//input with submit – får; array med objekter der beskriver: navn på field, default value, useState metode i en arrow func med e.target.value. 
 // Som den bruger til at lave input elementer med. + ting til submit knap: submit funktion navn på knap.
 
 //buttonFunction buttonText

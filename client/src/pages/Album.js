@@ -1,24 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {LinkTo, ListNumberCreaterDataText} from '../components';
+import getData from "../routing/fetcher.js";
 
 function Album(props) {
   const [album, setAlbum] = useState({});
 
-  //make a generel method for this? beside url this and AlbumList fetch is the same
   useEffect(() => {
-    async function getAlbum() {
-      const url = `${props.url}/album/${props.id}`;
-      const response = await fetch(url);
-      const albumRes = await response.json();
-      
-      if (albumRes.succes) {
-        setAlbum(albumRes.body);
-      }
-      else {
-        alert(albumRes.body);
-      }
-    }
-    getAlbum();
+    getData(`${props.url}/album/${props.id}`, setAlbum);
   }, [props.url, props.id]); 
 
   if (!album || (Object.keys(album).length === 0 && album.constructor === Object)) {
