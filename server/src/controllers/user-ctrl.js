@@ -28,8 +28,7 @@ authUser = async (req, res) => {
     res.status(401).json({succes: false, body: "Incorrect Password"});
     return;
   }
-
-  const token = jwt.sign({user: queryres.username}, secret, { algorithm: 'HS512', expiresIn: '4h' });
+  const token = jwt.sign({user: queryres.name}, secret, { algorithm: 'HS512', expiresIn: '4h' });
   res.status(200).json({succes: true, body: token});
 
 }

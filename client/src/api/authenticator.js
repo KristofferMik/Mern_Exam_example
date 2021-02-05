@@ -1,5 +1,4 @@
-// import jwt_decode from "jwt-decode";
-// https://stackoverflow.com/questions/49819183/react-what-is-the-best-way-to-handle-login-and-authentication
+import jwtdecode from "jwt-decode";
 
 class authenticator {
 
@@ -38,7 +37,7 @@ class authenticator {
     const userRes = await response.json();
     console.log(userRes);
     console.log(userRes.body);
-    
+
     if (userRes.succes){
       this.setLoginToken(userRes.body);
     }
@@ -52,11 +51,32 @@ class authenticator {
   }
 
   status() {
-    //check if user is expired here
+    let token = this.getLoginToken();
+    if (!token) {
+        return false;
+    }
+
+    let decodedToken = jwtdecode(token);
+    if (decodedToken.exp < Math.floor(Date.now()/1000)) {
+      this.logout();//removes token... just to be sure.
+      alert("Session ran out, please log on again");
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
   getUsername() {
-    //returns the username
+    let token = this.getLoginToken();
+
+    if (!token) {
+        return false;
+    }
+
+    let decodedToken = jwtdecode(token);
+
+    return decodedToken.user;
   }
 
 }

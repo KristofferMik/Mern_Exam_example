@@ -14,6 +14,8 @@ function AlbumList(props) {
       <LinkTo to="/login" text="Login"/>
       <p>The Albums:</p> 
       <ListLinks list={albums}/>
+      <button onClick={() => {props.auther.status()}}>status</button>
+      <button onClick={() => {props.auther.logout()}}>logout</button>
     </>
   )
 }
