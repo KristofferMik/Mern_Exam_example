@@ -5,7 +5,7 @@ import {getData, putData} from "../api/fetcher.js";
 function Album(props) {
   const [album, setAlbum] = useState({});
   const [showReview, setShowReview] = useState(false);
-  const [rating, setRating] = useState(1);
+  const [rating, setRating] = useState();
   const [review, setReview] = useState("");
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function Album(props) {
       return;
     }
     
-    putData(`${props.url}/albumReview`, setAlbum, {id: props.id, rating: rating,body: review, creator: props.auther.getUsername()}, props.auther);
+    putData(`${props.url}/albumReview`, sortReviews, {id: props.id, rating: rating,body: review, creator: props.auther.getUsername()}, props.auther);
     setRating(1);
     setReview("");
   }

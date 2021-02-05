@@ -16,6 +16,7 @@ class authenticator {
 
   removeLoginToken() {
     localStorage.removeItem("userLoginToken");
+    alert("Logged out");
   }
 
   async login(username, password) {
