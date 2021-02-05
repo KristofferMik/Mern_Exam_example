@@ -44,7 +44,8 @@ putAlbumReview = async (req, res) => {
   }
 
   try {
-    newReview = await Album.findByIdAndUpdate(req.body.id, { $push: {"reviews": {rating: req.body.rating, body: req.body.body}}}, {new: true});
+ 
+    newReview = await Album.findByIdAndUpdate(req.body.id, { $push: {"reviews": {rating: req.body.rating, body: req.body.body, creator: req.body.creator, DateOfCreation: Date.now()}}}, {new: true});
   } catch (error) {
     console.error("putAlbumReview:", error.message);
     res.status(400).json({succes: false, body: "An unexpected error"});

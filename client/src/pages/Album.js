@@ -1,14 +1,46 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import {LinkBack, ListNumberCreaterDataText} from '../components';
 
 function Album(props) {
-  const [msg, setMsg] = useState("Hello");
+  const [album, setAlbum] = useState({});
+
+  //make a generel method for this? beside url this and AlbumList fetch is the same
+  useEffect(() => {
+    async function getAlbum() {
+      const url = `${props.url}/album/${props.id}`;
+      const response = await fetch(url);
+      const albumRes = await response.json();
+      
+      if (albumRes.succes) {
+        setAlbum(albumRes.body);
+      }
+      else {
+        alert(albumRes.body);
+      }
+    }
+    getAlbum();
+  }, [props.url]); 
+
+  if (!album || (Object.keys(album).length === 0 && album.constructor === Object)) {
+    return (
+      <>
+        <p>No Data! try to refresh or go back to frontpage</p>
+        <LinkBack/>
+      </>
+    )
+  }
 
   return (
     <>
-      
-      
-      <p>{msg}</p> 
-
+      <LinkBack/>
+      <p>Title: {album.album.title}</p>
+      <p>Artist: {album.album.artist}</p>
+      <p>Genre: {album.album.genre}</p>
+      <p>Year of Release: {album.album.releaseYear}</p>
+      <p>Average rating: {album.reviewStats.reviewAvg}</p>
+      <p>Number of ratings: {album.reviewStats.reviewCount}</p>
+      <p>Reviews:</p>
+      <ListNumberCreaterDataText list={album.album.reviews}/>
     </>
   )
 }

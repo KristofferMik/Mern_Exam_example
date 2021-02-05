@@ -1,9 +1,11 @@
 import InputsWIthSubmit from './InputsWIthSubmit.js';
 import ListLinks from './ListLinks.js';
-import ListNumberAndText from './ListNumberAndText.js';
+import ListNumberCreaterDataText from './ListNumberCreaterDataText.js';
+import LinkBack from './LinkBack';
 
 export {
   InputsWIthSubmit, 
   ListLinks,
-  ListNumberAndText
+  ListNumberCreaterDataText,
+  LinkBack
 };

@@ -7,7 +7,11 @@ const Album = new Schema(
         artist: { type: String, required: true },
         genre: { type: String, required: true },
         releaseYear: { type: Number, required: true },
-        reviews: [{ rating: {type: Number, required: true}, body: {type: String, required: false} }]
+        reviews: [{ rating: {type: Number, required: true}, 
+                    body: {type: String, required: false}, 
+                    creator: {type: String, required: true},
+                    DateOfCreation: {type: Date, required: true}
+                }]
     }
 );
 

@@ -22,6 +22,7 @@ Returns a Review Object.
 */
 function creatAlbumReviewTest(text) {
   let bodyText;
+  const creators = ['John', 'Ayeri', 'Pwnster'];
 
   if (text) {
     bodyText = createSentence(10);
@@ -29,10 +30,12 @@ function creatAlbumReviewTest(text) {
   else {
     bodyText = "";
   }
-  
+
   const reviewTest = {
      rating: Math.floor((Math.random() * 10) + 1), 
-     body: bodyText 
+     body: bodyText,
+     creator: creators[Math.floor((Math.random() * 3))],
+     DateOfCreation: Date.now()
   };
 
   return reviewTest;
